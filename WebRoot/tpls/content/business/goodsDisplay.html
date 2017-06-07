@@ -1,0 +1,14 @@
+<div class="col-md-12">
+	<img  ng-src="{{presentGoods.imageurl}}">
+	<p>{{presentGoods.detail}}</p>
+	<p>价格：&nbsp;&nbsp;<strong class="text-danger">￥&nbsp;{{presentGoods.price}}</strong></p>
+	<p>收藏：&nbsp;&nbsp;
+		<span ng-if="goodscollectFlag == 1" ng-click="collectGoods(0,presentGoods.id)" class="text-danger glyphicon glyphicon-heart"></span>
+		<span ng-if="goodscollectFlag == 0" ng-click="collectGoods(1,presentGoods.id)" class="text-danger glyphicon glyphicon-heart-empty"></span>
+	</p>
+	
+	<p>商家：&nbsp;&nbsp;{{presentGoods.storename}}</p>
+	<p>电话：&nbsp;&nbsp;{{presentGoods.phone}}</p>
+	<p>地址：&nbsp;&nbsp;{{presentGoods.address}}</p>
+</div>
+

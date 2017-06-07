@@ -1,0 +1,58 @@
+<div class="col-md-12" style="background-color: #DEA19B" ui-view="">
+	<br>
+	<br>
+	<!-- 搜索框 -->
+	<div class="col-md-12">
+		<div class="input-group col-md-offset-2 col-md-8" >  
+       	<input type="text" class="form-control" ng-model="searchGoodsMessage" ng-keyup="enterEventTosearchGoods($event,searchGoodsMessage)" />  
+	        <span class="input-group-btn">  
+	           <button class="btn btn-info btn-search" ng-click="searchGoods(searchGoodsMessage,0,0,1)"><span class="glyphicon glyphicon-search"></span></button>  
+	        </span>  
+ 		</div>  
+	</div>
+	
+	<br>
+	<br>
+	<!-- 搜索结果设置 -->
+	<div class="col-md-12" ng-if="(nowPageGoods.length != null) && (nowPageGoods.length != 0)">
+		<span ng-click="searchGoods(searchGoodsMessage,0,'DESC',goodsNowPage)">人气排序</span>&nbsp;&nbsp;
+		<span  ng-click="searchGoods(searchGoodsMessage,'ASC',0,goodsNowPage)" >价格排序<span class="fa fa-long-arrow-up"></span></span>&nbsp;&nbsp;
+		<span  ng-click="searchGoods(searchGoodsMessage,'DESC',0,goodsNowPage)" >价格排序<span class="fa fa-long-arrow-down"></span> </span>
+	</div>
+	
+	<br>
+	<br>
+	<div class="col-md-12" ng-if="nowPageGoods.length != 0">
+		<div class="col-md-3" ng-repeat="goods in nowPageGoods"  >
+			<img  style="width: 100%;" class="img-rounded" ng-src="{{goods.imageurl}}">
+			<a ui-sref=".goodsDisplay" ng-click="getPresentGoods(goods.id)"><p><small><span ng-bind="goods.detail | goodsDetailLength:50"></span></small></p></a>
+			<p><small>收藏量：<span ng-bind="goods.collectionnum"></span></small></p>
+			<p><small>店铺：<span ng-bind="goods.storename"></span></small></p>
+			<p class="text-danger "><strong>￥&nbsp;<span ng-bind="goods.price"></span></strong></p>
+		</div>
+	</div>
+	
+	<div class="col-md-12 text-center" ng-if="(nowPageGoods.length != null) && (nowPageGoods.length != 0)">
+		<button class="btn" ng-click="searchGoods(searchGoodsMessage,rankBygoodsPrice,rankBygoodsCollectionnum,'goodsPageSubtract')">上一页</button>
+		<span ng-repeat="goodsPage in displayGoodsPage[(goodsNowPage | calculateDisplayPagePage:5)]">
+			<button ng-if="goodsNowPage == goodsPage" class="btn btn-primary" ng-click="searchGoods(searchGoodsMessage,rankBygoodsPrice,rankBygoodsCollectionnum,goodsPage)" ng-bind="goodsPage"></button>
+			<button ng-if="goodsNowPage != goodsPage" class="btn" ng-click="searchGoods(searchGoodsMessage,rankBygoodsPrice,rankBygoodsCollectionnum,goodsPage)" ng-bind="goodsPage"></button>
+		</span>
+		<button class="btn" ng-click="searchGoods(searchGoodsMessage,rankBygoodsPrice,rankBygoodsCollectionnum,'goodsPageAdd')">下一页</button>
+		<span>&nbsp;&nbsp;共&nbsp;<span ng-bind="displayGoodsTotalPage"></span>&nbsp;页</span>
+	</div>
+	<div class="col-md-12 text-center" ng-if="nowPageGoods.length == 0">
+		<p class="text-danger">没有您要搜索的商品</p>
+	</div>
+	<div class="col-md-12 text-center" ng-if="nowPageGoods.length == null">
+		<p class="text-danger">显示推荐的商品</p>
+	</div>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+	dfsdfds<br>
+</div>

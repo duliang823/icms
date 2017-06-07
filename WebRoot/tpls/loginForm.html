@@ -1,0 +1,40 @@
+<div ng-controller="LoginCtrl">
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<div class="row">
+		        <div class="col-md-12">
+		            <h2 class="text-center">智慧社区管理系统</h2>
+		        </div>
+	    	</div>
+	    	<div class="row">
+            	<div class="col-md-12">
+            		 <label class="col-md-2 control-label">
+                                                              账号：
+                     </label>
+                     <div class="col-md-10">
+                     	<input type="text" class="form-control" ng-model="UserInfo.loginid">
+                     </div>
+            	</div>
+            	<div class="col-md-12">
+            		 <label class="col-md-2 control-label">
+                                                              密码：
+                     </label>
+                     <div class="col-md-10">
+                     	<input type="password" class="form-control" ng-model="UserInfo.password">
+                     </div>
+            	</div>
+            	<div class="col-md-12" ng-show="loginError.show">
+            		<div class="col-md-12 text-center text-danger">
+            			账号或密码错误
+            		</div>
+            	</div>
+            	<div class="col-md-12">
+            		<a class="col-md-2 btn btn-success" ng-click="login()">登陆</a>
+            		<a class="col-md-2 btn btn-default" ui-sref="register">注册</a>
+            	</div>
+            </div>
+		</div>
+	</div>
+</div>
+
+ 

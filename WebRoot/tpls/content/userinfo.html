@@ -1,0 +1,121 @@
+<div class="col-md-12" style="background-color: #B5D49A;">
+    <div class="col-md-12 text-center">
+	    <h2>社区人员信息</h2>
+    </div>
+    <div class="col-md-12 text-right" ng-if="UserInfo.administrator == 1">
+    	<a class="btn btn-default"  ng-click="saveUserInfos()">保存当前页</a>
+    	<br>
+    </div>
+    <div class="col-md-12 text-right" ng-if="UserInfo.administrator == 0">
+    	<p class="text-danger">普通用户无修改社区人员信息权限</p>
+    </div>
+    <div class="col-md-12 ">
+    	<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">序号</th>
+					<th class="text-center">登录账号</th>
+					<th class="text-center">姓名</th>
+					<th class="text-center">email</th>
+					<th class="text-center">电话号码</th>
+					<th class="text-center">年龄</th>
+					<th class="text-center">性别</th>
+					<th class="text-center">楼栋号</th>
+					<th class="text-center">单元号</th>
+					<th class="text-center">门牌号</th>
+					<th class="text-center" ng-if="UserInfo.administrator == 1">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="userInfo in userInfos" ng-if="UserInfo.administrator == 1">
+					<td>{{(pagenow-1)*10+($index + 1)}}</td>
+					<td>{{userInfo.loginid}}</td>
+					<td>
+						<input size="7" type="text" id='txt_username_{{userInfo.id}}' ng-model="userInfo.username" class="inactive"  readonly />
+					</td>
+					<td>
+						<input  type="text" id='txt_email_{{userInfo.id}}' ng-model="userInfo.email" class="inactive" readonly />
+					</td>
+					<td>
+						<input size="10" type="text" id='txt_phonenumber_{{userInfo.id}}' ng-model="userInfo.phonenumber" class="inactive" readonly />
+					</td>
+					<td>
+						<input style="width: 55px;" type="number" id='txt_age_{{userInfo.id}}' ng-model="userInfo.age" class="inactive" readonly />
+					</td>
+					<td>
+						<input type="radio" id='txt_sex1_{{userInfo.id}}' name="sex_{{userInfo.id}}" value="男" ng-model="userInfo.sex" class="inactive" disabled />男
+						<input type="radio" id='txt_sex2_{{userInfo.id}}' name="sex_{{userInfo.id}}" value="女" ng-model="userInfo.sex" class="inactive" disabled />女	
+					</td>
+					<td>
+						<input style="width: 55px;" type="number" id='txt_blocknum_{{userInfo.id}}' ng-model="userInfo.blocknum" class="inactive" readonly />
+					</td>
+					<td>
+						<input style="width: 55px;" type="number" id='txt_unitnum_{{userInfo.id}}' ng-model="userInfo.unitnum" class="inactive" readonly />
+					</td>
+					<td>
+						<input style="width: 55px;" type="number" id='txt_housenum_{{userInfo.id}}' ng-model="userInfo.housenum" class="inactive" readonly />
+					</td>
+					<td><edit ng-Model="userInfo" ng-show="showEdit"><a>编辑</a></edit>
+			            <update ng-Model="userInfo" ng-show="!showEdit"><a>保存</a></update> 
+			            <cancel ng-Model="userInfo" ng-show="!showEdit"> | <a>取消</a></cancel>
+			          | <delete ng-Model="userInfo"><a>删除</a></delete>
+			           
+			        </td>
+				</tr>
+				<tr ng-repeat="userInfo in userInfos" ng-if="UserInfo.administrator == 0">
+					<td>{{(pagenow-1)*10+($index + 1)}}</td>
+					<td>{{userInfo.loginid}}</td>
+					<td>{{userInfo.username}}</td>
+					<td>{{userInfo.email}}</td>
+					<td>{{userInfo.phonenumber}}</td>
+					<td>{{userInfo.age}}</td>
+					<td>{{userInfo.sex}}</td>
+					<td>{{userInfo.blocknum}}</td>
+					<td>{{userInfo.unitnum}}</td>
+					<td>{{userInfo.housenum}}</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    <div class="col-md-12 text-center">
+    	<nav>
+			<ul class="pagination">
+				<li>
+					<a ng-click="Previous()">
+					<span>上一页</span>
+					</a>
+				</li>
+				<li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+					<a ng-click="selectPage(page)" >{{ page }}</a>
+				</li>
+				<li>
+					<a ng-click="Next()">
+						<span>下一页</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+    </div>
+    
+</div>
+
+
+<script type="text/ng-template" id="updateUserInfosModal"> 
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title text-center">
+           	 <p>社区人员信息修改</p>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="text-center ">
+            <h4><p class="text-success">修改成功</p></h4>
+        </div>
+    </div>
+    <div class="modal-footer">
+		<div class="text-center">
+        	<button class="btn btn-primary" ng-click="updateOk()">确认</button>
+		</div>
+    </div>
+</div>
+</script>

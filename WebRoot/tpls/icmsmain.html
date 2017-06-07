@@ -1,0 +1,127 @@
+<script type="text/javascript" src="js/icmsmain.js"></script>
+
+<div ng-controller="IcmsmainCtrl" >
+     <div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a ui-sref="icmsmain" class="navbar-brand" style="padding:0;"><img style="width: 140px;height: 45px;" src="img/img_icmsmain/icms_logo.png" alt="智慧社区网"></a>
+				</div>
+				<ul class="nav nav-tabs navbar-right">
+					<li><a class="btn btn-default" ui-sref="icmsmain"><span class="glyphicon glyphicon-home">&nbsp;首页</span></a></li>
+		            <li><a class="btn btn-default" ui-sref=".facility"><span class="glyphicon glyphicon-tower">&nbsp;社区概况</span></a></li>
+		            <li><a class="btn btn-default" ui-sref=".notice"><span class="glyphicon glyphicon-volume-down">&nbsp;社区公告</span></a></li>
+		            <li><a class="btn btn-default" ui-sref=".userinfo"><span class="glyphicon glyphicon-user">&nbsp;人员信息</span></a></li>
+		            <li><a class="btn btn-default" ui-sref=".property"><span class="glyphicon glyphicon-phone-alt">&nbsp;物业管理</span></a></li>
+					<li class="dropdown">
+						<a ui-sref=".business" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-shopping-cart">&nbsp;商业服务</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a ui-sref=".business.tradeMarket">周边商城</a></li>
+							<li><a ui-sref=".business.housekeeping">家政服务</a></li>
+						</ul>
+					</li>
+					<li><a class="btn btn-default" ui-sref=".personal"><span class="fa fa-vcard">&nbsp;个人主页</span></a></li>
+				</ul>
+				<p>&nbsp;欢迎：<a ui-sref=".personal" ng-bind="UserInfo.username"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span></a></p>
+				<p>&nbsp;身份：<span ng-bind="UserInfo.administrator | administratorFilter"></span></p>
+			</div>
+		</nav>
+		
+     </div>
+     <br>
+     <br>
+     <br>
+     <div>
+          <div class="row">
+          		<div class="col-md-1" style="background-color: #888F93">
+          			广告位左
+          		</div>
+          		<div class="col-md-10">
+          			<div ui-view="">
+					<!-- 图片轮播 -->
+					<div class="col-md-offset-1 col-md-10">
+						<div  class="carousel slide" > 
+							<div class="carousel-inner" >
+								<img style="height: 400px;width: 1050px;" class="item" ng-class="{active:x.id === lunbo.currentId}" ng-repeat="x in lunboImg" ng-src="{{x.img}}"/>
+							</div>
+							<a class="left carousel-control" href="javascript:void(0)" ng-click="previousImg()">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" href="javascript:void(0)" ng-click="nextImg()">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<!-- 社区新闻 -->
+						<div class="col-md-6" style="background-color: #76AD8E;">
+							<h3><p class="text-left">社区新闻</p></h3>
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<ul  class="list-group">
+										<li ><a ui-sref="#" >“挥毫泼大墨 书画惠民生”联谊活动在社区举行</a></li>
+										<li><a ui-sref=" #" >连接2</a></li>
+										<li><a ui-sref=" #" >连接3</a></li>
+										<li><a ui-sref=" #" >连接4</a></li>
+										<li><a ui-sref=" #" >连接5</a></li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									图片区域
+								</div>
+							</div>
+						</div>
+						
+						<!-- 社区公告 -->
+						<div class="col-md-6" style="background-color: #DADADA;">
+							<h3><p class="text-left">社区公告</p></h3>
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<ul  class="list-group">
+										<li><a ui-sref=" #" >连接1</a></li>
+										<li><a ui-sref=" #" >连接2</a></li>
+										<li><a ui-sref=" #" >连接3</a></li>
+										<li><a ui-sref=" #" >连接4</a></li>
+										<li><a ui-sref=" #" >连接5</a></li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									图片区域
+								</div>
+							</div>
+						</div>
+						<!-- 快速链接 -->
+						<div class="col-md-12" style="background-color: #DADADA;">
+							<h3><p class="text-left">快速链接</p></h3>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+							<a class="btn btn-link">快速链接1</a>
+						</div>
+					</div>
+		    	  </div>
+          		</div>
+          		<div class="col-md-1" style="background-color: #888F93">
+          			广告位右
+          		</div>
+          </div>
+     </div>
+     
+     <!-- 页脚 -->
+     <div>
+     	<nav class="navbar navbar-default navbar-fixed-bottom">
+     		<br>
+     		<p class="text-center"  style="font-family:arial;">Copyright © 2017 Chongqing University of Posts and Telecommunications All rights reserved.</p>
+     	</nav>
+     </div>
+     
+</div>
+
+

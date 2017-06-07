@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="icms"
+  id="myeclipse.1492839462762"
+  context-root="/icms"
+  j2ee-spec="5.0"
+  archive="icms.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,117 @@
+<div ng-controller="RegisterCtrl">
+	<div class="panel panel-primary">
+		 <div class="panel-body">
+		 	<div class="row">
+		 		<div class="col-md-12">
+                	<h4 class="text-center">用户注册</h2>
+            	</div>
+		 	</div>
+		 	<div class="row">
+		 		<div class="col-md-12">
+                	<form name="signUpForm" ng-submit="submitForm()">
+                		<div class="form-group" ng-class="{'has-success':signUpForm.username.$valid}">
+				    		<label class="col-md-2">姓名：</label>
+				    		<div class="col-md-10">
+				    			<input name="username" 
+				    			   type="text" 
+				    			   class="form-control"
+				    			   ng-model="UserInfo.username"
+				    			   ng-minlength="1"
+				    			   ng-maxlength="16"
+				    			   required
+				    			   >
+				    			<p class="fa fa-check" ng-if="signUpForm.username.$valid" style="color:#3c763d;"></p>
+				    			<p style="color:red;" ng-if="
+					    						signUpForm.username.$error.required  && 
+												signUpForm.username.$touched">
+					    			姓名不可为空			 
+					    		</p>
+					    		<p style="color:red;" ng-if="
+					    						(signUpForm.username.$error.minlength || 
+												signUpForm.username.$error.maxlength)  && 
+												signUpForm.username.$touched">
+					    			用户名长度应在1-16之间				 
+					    		</p>  
+				    		</div>
+				    	</div>
+				    	<div class="form-group" ng-class="{'has-success':signUpForm.loginid.$valid}">
+				    		<label class="col-md-2">登录账号：</label>
+				    		<div class="col-md-10">
+				    			<input name="loginid" 
+					    			   type="text" 
+					    			   class="form-control"
+					    			   ng-model="UserInfo.loginid"
+					    			   ng-minlength="4"
+					    			   ng-maxlength="16"
+					    			   required
+					    			   >
+					    		<p ng-show="registerError.show" ng-if="signUpForm.loginid.$valid" style="color:red;">该登录账号已被注册</p>
+					    		<p ng-show="registerError.hide" ng-if="signUpForm.loginid.$valid" class="fa fa-check" style="color:#3c763d;">该登录账号可用</p>
+					    		<p style="color:red;" ng-if="
+						    						signUpForm.loginid.$error.required  && 
+													signUpForm.loginid.$touched">
+						    			登录账号不可为空			 
+						    	</p>
+						    	<p style="color:red;" ng-if="
+					    						(signUpForm.loginid.$error.minlength || 
+												signUpForm.loginid.$error.maxlength)  && 
+												signUpForm.loginid.$touched">
+					    			登录账号长度应在4-16之间				 
+					    		</p>  
+				    		</div>
+				    	</div>
+				    	<div class="form-group" ng-class="{'has-success':signUpForm.password.$valid}">
+				    		<label class="col-md-2">登录密码：</label>
+				    		<div class="col-md-10">
+				    			<input name="password" 
+					    			   type="password" 
+					    			   class="form-control"
+					    			   ng-model="UserInfo.password"
+					    			   ng-minlength="6"
+					    			   ng-maxlength="16"
+					    			   required
+					    			   >
+					    		<p class="fa fa-check" ng-if="signUpForm.password.$valid" style="color:#3c763d;"></p>
+					    		<p style="color:red;" ng-if="
+						    						signUpForm.password.$error.required  && 
+													signUpForm.password.$touched">
+						    			登录密码不可为空			 
+						    	</p>
+						    	<p style="color:red;" ng-if="
+					    						(signUpForm.password.$error.minlength || 
+												signUpForm.password.$error.maxlength)  && 
+												signUpForm.password.$touched">
+					    			登录密码长度应在6-16之间				 
+					    		</p>  
+				    		</div>
+				    	</div>
+				    	<div class="form-group" ng-class="{'has-success':signUpForm.password2.$valid}">
+				    		<label class="col-md-2">确认密码：</label>
+				    		<div class="col-md-10">
+				    			<input name="password2" 
+					    			   type="password" 
+					    			   class="form-control"
+					    			   ng-model="UserInfo.password2"
+					    			   compare="UserInfo.password"
+					    			   required
+					    			   >
+					    		<p class="fa fa-check" ng-if="signUpForm.password2.$valid" style="color:#3c763d;"></p>
+					    		<p style="color:red;" ng-if="
+					    						signUpForm.password2.$error.compare  && 
+												signUpForm.password2.$touched">
+									两次登录密码输入不一致			
+								</p>
+				    		</div>
+				    	</div>
+				    	<div class="form-group">
+				    		<div class="col-md-offset-2 col-md-10">
+				    			<button type="submit" class="btn btn-primary" ng-disabled="signUpForm.$invalid">注册</button>
+				    		</div>
+				    	</div>
+                	</form>
+            	</div>
+		 	</div>			 
+		 </div>
+	</div>
+</div>
+

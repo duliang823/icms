@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.ssm.mapper.UserInfoMapperCustom">
+	
+  	
+  	<!-- 用户信息的列表查询 -->
+  	<select id="findUserInfoList" parameterType="cn.itcast.ssm.po.UserInfoQueryVo" resultType="cn.itcast.ssm.po.UserInfoCustom">
+  		SELECT user_info.* FROM user_info WHERE user_info.loginid = '${userInfoCustom.loginid}' and user_info.password = '${userInfoCustom.password}' 
+  	</select>
+  	
+  	<!-- 根据登陆账号查询用户信息列表 -->
+  	<select id="findUserInfoByloginid" parameterType="cn.itcast.ssm.po.UserInfoQueryVo" resultType="cn.itcast.ssm.po.UserInfoCustom">
+  		SELECT user_info.* FROM user_info WHERE user_info.loginid = '${userInfoCustom.loginid}' 
+  	</select>
+  	
+  	<!-- 保存用户 -->
+  	<insert id="saveUserInfo" parameterType="cn.itcast.ssm.po.UserInfoQueryVo">
+  		INSERT INTO user_info (username,loginid,password) VALUES ('${userInfoCustom.username}','${userInfoCustom.loginid}','${userInfoCustom.password}')
+  	</insert>
+  	
+  	<!-- 更新用户 -->
+  	<update id="updateUserInfo" parameterType="cn.itcast.ssm.po.UserInfoQueryVo">
+  		UPDATE user_info SET 
+	  		email='${userInfoCustom.email}',
+	  		phonenumber='${userInfoCustom.phonenumber}',
+	  		sex='${userInfoCustom.sex}',
+	  		
+	  		<if test="userInfoCustom.age != null and userInfoCustom.age != '' ">
+  				age='${userInfoCustom.age}',
+  			</if>
+	  		<if test="userInfoCustom.age == null or userInfoCustom.age == '' ">
+  				age=null,
+  			</if>
+  			
+  			<if test="userInfoCustom.blocknum != null and userInfoCustom.blocknum != '' ">
+  				blocknum='${userInfoCustom.blocknum}',
+  			</if>
+  			<if test="userInfoCustom.blocknum == null or userInfoCustom.blocknum == '' ">
+  				blocknum=null,
+  			</if>
+  			
+  			<if test="userInfoCustom.unitnum != null and userInfoCustom.unitnum != '' ">
+  				unitnum='${userInfoCustom.unitnum}',
+  			</if>
+  			<if test="userInfoCustom.unitnum == null or userInfoCustom.unitnum == '' ">
+  				unitnum=null, 
+  			</if>
+  			
+  			<if test="userInfoCustom.housenum != null and userInfoCustom.housenum != '' ">
+  				housenum='${userInfoCustom.housenum}' 
+  			</if>
+  			<if test="userInfoCustom.housenum == null or userInfoCustom.housenum == '' ">
+  				housenum=null 
+  			</if> 
+	  		
+	  		WHERE loginid='${userInfoCustom.loginid}'
+  	</update>
+  	
+  	<!-- 查询所有用户列表 -->
+  	<select id="findUserInfosList" resultType="cn.itcast.ssm.po.UserInfoCustom">
+  		SELECT user_info.* FROM user_info
+  	</select>
+  	
+  	<!-- 更新多条用户信息 -->
+  	<update id="updateUserInfoList" parameterType="cn.itcast.ssm.po.UserInfoQueryVo">
+  		UPDATE user_info  
+    		SET  
+   			username = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				WHEN ${item.id} THEN '${item.username}'  
+   			</foreach>
+   			END,
+   			email = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				WHEN ${item.id} THEN '${item.email}'  
+   			</foreach>
+   			END,
+   			phonenumber = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				WHEN ${item.id} THEN '${item.phonenumber}'  
+   			</foreach>
+   			END,
+   			age = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				<if test="item.age != null">
+   					WHEN ${item.id} THEN ${item.age}  
+   				</if>
+   				<if test="item.age == null">
+   					WHEN ${item.id} THEN null  
+   				</if>
+   			</foreach>
+   			END,
+   			sex = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				WHEN ${item.id} THEN '${item.sex}'  
+   			</foreach>
+   			END,
+   			blocknum = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				<if test="item.blocknum != null">
+   					WHEN ${item.id} THEN ${item.blocknum}  
+   				</if>
+   				<if test="item.blocknum == null">
+   					WHEN ${item.id} THEN null  
+   				</if> 
+   			</foreach>
+   			END,
+   			unitnum = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				<if test="item.unitnum != null">
+   					WHEN ${item.id} THEN ${item.unitnum}  
+   				</if>
+   				<if test="item.unitnum == null">
+   					WHEN ${item.id} THEN null  
+   				</if>
+   			</foreach>
+   			END,
+   			housenum = CASE id  
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="" separator="" close="">
+   				<if test="item.housenum != null">
+   					WHEN ${item.id} THEN ${item.housenum}  
+   				</if>
+   				<if test="item.housenum == null">
+   					WHEN ${item.id} THEN null  
+   				</if>
+   			</foreach>
+   			END 
+   		WHERE id IN 
+   			<foreach collection="userInfoCustomList" index="index" item="item" open="(" separator="," close=")">
+   				${item.id} 
+   			</foreach>
+  	</update>
+  	
+  	<!-- 根据多个id批量删除用户信息 -->
+  	<delete id="deleteUserInfosById" parameterType="cn.itcast.ssm.po.UserInfoQueryVo" >
+  		DELETE FROM user_info WHERE id IN  
+  		<foreach collection="userInfoCustomList" index="index" item="item" open="(" separator="," close=")">
+			${item.id}  
+  		</foreach>
+  	</delete>
+  	
+</mapper>
+

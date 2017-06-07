@@ -1,0 +1,162 @@
+<div class="col-md-12" style="background-color: #B5D49A;">
+	<div class="col-md-12 text-center">
+		<h2>个人信息</h2>
+	</div>
+	<div class="col-md-12">
+		<form name="personalForm" ng-submit="updateForm()">
+			<div class="form-group">
+				<label class="col-md-2">登陆账号：</label>
+				<div class="col-md-10">
+					<input name="loginid" type="text" class="form-control" ng-model="UpdateUserInfo.loginid" disabled="disabled">
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="form-group">
+				<label class="col-md-2">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+				<div class="col-md-10">
+					<input name="username" 
+		    			   type="text" 
+		    			   class="form-control"
+		    			   ng-model="UpdateUserInfo.username"
+		    			   ng-minlength="1"
+		    			   ng-maxlength="16"
+		    			   required
+		    			   >
+		    		<p class="fa fa-check" ng-if="personalForm.username.$valid && personalForm.username.$touched" style="color:#3c763d;"></p>
+		    		<p style="color:red;" ng-if="personalForm.username.$error.required  && personalForm.username.$touched">姓名不可为空</p>
+		    		<p style="color:red;" ng-if="(personalForm.username.$error.minlength || personalForm.username.$error.maxlength)  && personalForm.username.$touched">用户名长度应在1-16之间</p>  
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="form-group">
+				<label class="col-md-2">email：</label>
+				<div class="col-md-10">
+					<input name="email" 
+		    			   type="email" 
+		    			   class="form-control"
+		    			   ng-model="UpdateUserInfo.email"
+		    			   >
+		    		<p class="fa fa-check" ng-if="personalForm.email.$valid && personalForm.email.$touched" style="color:#3c763d;"></p>
+		    		<p style="color:red;" ng-if="personalForm.email.$error.email  && personalForm.email.$touched">email格式不规范</p>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="form-group">
+				<label class="col-md-2">电话号码：</label>
+				<div class="col-md-10">
+					<input name="phonenumber" 
+		    			   type="text" 
+		    			   class="form-control"
+		    			   ng-model="UpdateUserInfo.phonenumber"
+		    			   >
+		    		<p class="fa fa-check" ng-if="personalForm.phonenumber.$valid && personalForm.phonenumber.$touched" style="color:#3c763d;"></p>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="col-md-12">
+				<div class="form-group col-md-4">
+					<label class="col-md-4">年&nbsp;&nbsp;&nbsp;&nbsp;龄：</label>
+					<div class="col-md-5">
+						<input name="age" 
+			    			   type="number" 
+			    			   class="form-control"
+			    			   ng-model="UpdateUserInfo.age"
+			    			   >
+			    		<p class="fa fa-check" ng-if="personalForm.age.$valid && personalForm.age.$touched" style="color:#3c763d;"></p>
+					</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label class="col-md-4">性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+					<div class="col-md-5">
+						<input type="radio" name="sex" value="男" ng-model="UpdateUserInfo.sex" />男
+						<input type="radio" name="sex" value="女" ng-model="UpdateUserInfo.sex" />女	
+						<p class="fa fa-check" ng-if="personalForm.sex.$valid && personalForm.sex.$touched" style="color:#3c763d;"></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group col-md-4">
+					<label class="col-md-4">楼栋号：</label>
+					<div class="col-md-5">
+						<input name="blocknum" 
+			    			   type="number" 
+			    			   class="form-control"
+			    			   ng-model="UpdateUserInfo.blocknum"
+			    			   >
+			    		<p class="fa fa-check" ng-if="personalForm.blocknum.$valid && personalForm.blocknum.$touched" style="color:#3c763d;"></p>
+					</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label class="col-md-4">单元号：</label>
+					<div class="col-md-5">
+						<input name="unitnum" 
+			    			   type="number" 
+			    			   class="form-control"
+			    			   ng-model="UpdateUserInfo.unitnum"
+			    			   >
+			    		<p class="fa fa-check" ng-if="personalForm.unitnum.$valid && personalForm.unitnum.$touched" style="color:#3c763d;"></p>
+					</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label class="col-md-4">门牌号：</label>
+					<div class="col-md-5">
+						<input name="housenum" 
+			    			   type="number" 
+			    			   class="form-control"
+			    			   ng-model="UpdateUserInfo.housenum"
+			    			   >
+			    		<p class="fa fa-check" ng-if="personalForm.housenum.$valid && personalForm.housenum.$touched" style="color:#3c763d;"></p>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="form-group">
+	    		<div class="col-md-12 text-center" >
+	    			<button type="submit" class="btn btn-primary" ng-disabled="personalForm.$invalid">确认修改</button>
+	    		</div>
+	    	</div>
+		</form>
+	</div>
+	
+	姓名：{{UserInfo.username}}<br>
+	登陆账号：{{UserInfo.loginid}}<br>
+	密码：{{UserInfo.password}}<br>
+	生日：{{UserInfo.birthday | date:"yyyy-MM-dd"}}<br>
+	楼栋号：{{UserInfo.blocknum}}<br>
+	单元号：{{UserInfo.unitnum}}<br>
+	门牌号：{{UserInfo.housenum}}<br>
+	是否是管理员：{{UserInfo.administrator}}<br>
+	email：{{UserInfo.email}}<br>
+	电话：{{UserInfo.phonenumber}}<br>
+	年龄：{{UserInfo.age}}<br>
+</div>
+
+
+<script type="text/ng-template" id="updatePersonalModal"> 
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title text-center">
+           	 <p>个人信息修改</p>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="text-center ">
+            <h4><p class="text-success">修改成功</p></h4>
+        </div>
+    </div>
+    <div class="modal-footer">
+		<div class="text-center">
+        	<button class="btn btn-primary" ng-click="updateOk()">确认</button>
+		</div>
+    </div>
+</div>
+</script>
+

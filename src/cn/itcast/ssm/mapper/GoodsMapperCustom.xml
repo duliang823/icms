@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.ssm.mapper.GoodsMapperCustom">
+	
+	<!-- 查询所有商品信息 -->
+	<select id="findAllGoodsList" resultType="cn.itcast.ssm.po.GoodsCustom">
+		SELECT * FROM goods
+	</select>
+	
+	<!-- 根据商品id查询商品信息 -->
+	<select id="findGoodsById" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+		SELECT goods.*,store.name,store.phone,store.address FROM goods,store WHERE goods.id = '${goodsCustom.id}'
+	</select>
+	
+	
+	<!-- 根据用户id查询用户的商品收藏情况 -->
+	<select id="findGoodscollectListByUserid" parameterType="cn.itcast.ssm.po.UserInfoQueryVo" resultType="cn.itcast.ssm.po.Goodscollect">
+		SELECT goodscollect.* FROM goodscollect WHERE goodscollect.userid = '${userInfoCustom.id}'
+	</select>
+	
+	<!-- 保存数据到Goodscollect -->
+	<insert id="saveGoodscollect" parameterType="cn.itcast.ssm.po.GoodscollectQueryVo">
+		INSERT INTO goodscollect (userid,goodsid) VALUES ('${goodscollect.userid}','${goodscollect.goodsid}')
+	</insert>
+	
+	<!-- 根据用户id和商品id删除Goodscollect中的数据 -->
+	<delete id="deleteGoodscollectByuseridAndgoodsid" parameterType="cn.itcast.ssm.po.GoodscollectQueryVo">
+		DELETE FROM goodscollect WHERE userid='${goodscollect.userid}' AND goodsid='${goodscollect.goodsid}'
+	</delete>
+	
+	<!-- 根据商品搜索信息模糊查询商品列表 -->
+  	<select id="findGoodscollectListBySearch" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+  		SELECT goods.* FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%' 
+  	</select>
+  	
+  	<!-- 根据商品搜索信息模糊查询商品列表并按商品价格升序排序 -->
+  	<select id="findGoodscollectListBySearchAsc" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+  		SELECT goods.* FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%' ORDER BY price ASC
+  	</select>
+  	
+  	<!-- 根据商品搜索信息模糊查询商品列表并按商品价格降序排序 -->
+  	<select id="findGoodscollectListBySearchDesc" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+  		SELECT goods.* FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%' ORDER BY price DESC
+  	</select>
+  	
+  	<!-- 根据商品搜索信息模糊查询商品列表并按收藏量降序排序 -->
+  	<select id="findGoodscollectListByCollectionnumDesc" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+  		SELECT goods.* FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%' ORDER BY collectionnum DESC
+  	</select>
+  	
+  	<!-- 根据用户是否收藏该商品，对该商品的收藏量进行增减 -->
+  	<update id="updateGoodsCollectionnum" parameterType="cn.itcast.ssm.po.GoodscollectQueryVo">
+  		UPDATE goods SET collectionnum = collectionnum 
+			<if test="goodscollect.collectionnumAdd == 1">+1 </if>
+			<if test="goodscollect.collectionnumAdd == 0">-1 </if>
+		 	WHERE goods.id = '${goodscollect.goodsid}'
+  	</update>
+  	
+  	<!-- 根据商品搜索信息模糊查询商品的数量 -->
+  	<select id="selectGoodsCountBySM" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="java.lang.Integer">
+  		SELECT COUNT(*) FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%'
+  	</select>
+  	
+  	<!-- 根据查询信息分页情况返回商品信息 -->
+  	<select id="selectGoodsListBySM" parameterType="cn.itcast.ssm.po.GoodsQueryVo" resultType="cn.itcast.ssm.po.GoodsCustom">
+  		SELECT * FROM goods WHERE detail LIKE '%${goodsCustom.searchMessage}%'
+  		<choose>
+  			<when test="goodsCustom.rankBygoodsPrice == 'ASC'">ORDER BY price ASC </when>
+  			<when test="goodsCustom.rankBygoodsPrice == 'DESC'">ORDER BY price DESC </when>
+  			<otherwise> </otherwise>
+  		</choose>
+  		<choose>
+  			<when test="goodsCustom.rankBygoodsCollectionnum == 'DESC'">ORDER BY collectionnum DESC </when>
+  			<otherwise> </otherwise>
+  		</choose>
+  		 limit  ${goodsCustom.goodsFirstMumInNowPage},${goodsCustom.goodsPageSize}
+  	</select>
+  	
+</mapper>
+

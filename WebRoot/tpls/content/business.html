@@ -1,0 +1,71 @@
+<div class="col-md-12">
+	<div class="col-md-2" style="background-color: #4EEFE1">
+		<br>
+		<br>
+		<div class="text-center">
+			<a class="btn btn-default" ui-sref="icmsmain.business">商业服务</a><br>
+	        <a class="btn btn-default" ui-sref=".tradeMarket">周边商城</a><br>
+	        <a class="btn btn-default" ui-sref=".housekeeping">家政服务</a><br>
+		</div>
+		<br>
+		<br>
+	</div>
+	<div class="col-md-10" ui-view="">
+		<div class="col-md-12" style="background-color: #DEA19B">
+			
+			<br>
+			<br>
+			
+			<div class="col-md-12">
+				<!-- 商业服务轮播图 -->
+				<div class="col-md-9">
+					<div  class="carousel slide"> 
+						<div class="carousel-inner">
+							<img style="width: 630px; height: 330px;" class="item" ng-class="{active:x.id === lunboBusiness.currentId}" ng-repeat="x in lunboImgBusiness" ng-src="{{x.img}}"/>
+						</div>
+						<a class="left carousel-control" href="javascript:void(0)" ng-click="previousImgBusiness()">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="javascript:void(0)" ng-click="nextImgBusiness()">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div>
+				</div>
+				<!-- 快速连接区 -->
+				<div class="col-md-3">
+					<div class="col-md-12">
+						<h3>商家推荐</h3>
+					</div>
+					<div class="col-md-12">
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+						<a>玩具店公仔礼包超级放送</a><br>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 今日特价 -->
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<h3>今日特惠</h3>
+				</div>
+				<div class="col-md-2" ng-repeat="sgi in specialGoodsImg">
+					<img ng-src="{{sgi.img}}">
+					<br>
+					<p><small>{{sgi.text}}</small></p>
+					<p class="text-danger "><strong>￥&nbsp;{{sgi.price}}</strong></p>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

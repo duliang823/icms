@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/easyui/jquery.min.js,WebRoot/html/easyui/jquery.min.js,WebRoot/html/easyui/locale/easyui-lang-zh_TW.js,WebRoot/framework/easyui/jquery.min.js,WebRoot/html/easyui/locale/easyui-lang-jp.js,WebRoot/framework/easyui1.3.6/jquery.min.js,WebRoot/easyui/locale,WebRoot/html/easyui/locale/easyui-lang-zh_CN.js,WebRoot/html/easyui/locale/easyui-lang-cz.js
+validator.Unchecked=

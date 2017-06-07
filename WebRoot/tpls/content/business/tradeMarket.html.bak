@@ -1,0 +1,52 @@
+<div class="col-md-12" style="background-color: #DEA19B" ui-view="">
+	<br>
+	<br>
+	<!-- 搜索框 -->
+	<div class="col-md-12">
+		<div class="input-group col-md-offset-2 col-md-8" >  
+       	<input type="text" class="form-control" ng-model="searchGoodsMessage"/>  
+	        <span class="input-group-btn">  
+	           <button class="btn btn-info btn-search" ng-click="searchGoods(searchGoodsMessage)"><span class="glyphicon glyphicon-search"></span></button>  
+	        </span>  
+ 		</div>  
+	</div>
+	
+	<br>
+	<br>
+	<!-- 搜索结果设置 -->
+	<div class="col-md-12">
+		<span ng-click="rankByCollectionnum()">人气排序</span>&nbsp;&nbsp;<span ng-if="rankASC == 'DESC'" ng-click="rankByPrice('ASC')">价格排序<span class="fa fa-long-arrow-up"></span></span> <span ng-if="rankASC == 'ASC'" ng-click="rankByPrice('DESC')">价格排序<span class="fa fa-long-arrow-down"></span> </span>
+	</div>
+	
+	<br>
+	<br>
+	<!-- 搜索结果显示 -->
+	<!-- <div class="col-md-12" ng-if="allGoods.length != 0">
+		<div class="col-md-3" ng-repeat="goods in allGoods"  >
+			<img  style="width: 100%;" class="img-rounded" ng-src="{{goods.imageurl}}">
+			<a ui-sref=".goodsDisplay" ng-click="getPresentGoods(goods.id)"><p><small><span ng-bind="goods.detail | goodsDetailLength:50"></span></small></p></a>
+			<p><small>收藏量：<span ng-bind="goods.collectionnum"></span></small></p>
+			<p><small>店铺：<span ng-bind="goods.storename"></span></small></p>
+			<p class="text-danger "><strong>￥&nbsp;<span ng-bind="goods.price"></span></strong></p>
+		</div>
+	</div> -->
+	
+	<div class="col-md-12" ng-if="goodsPerPage8.length != 0">
+		<div class="col-md-3" ng-repeat="goods in goodsPerPage8[goodsNowPage-1]">
+			<a ui-sref=".goodsDisplay" ng-click="getPresentGoods(goods.id)"><p><small><span ng-bind="goods.detail | goodsDetailLength:50"></span></small></p></a>
+		</div>
+	</div>
+	
+	<div class="col-md-12" ng-if="allGoods.length == 0">
+		<p class="text-center text-danger">没有您搜索的商品</p>
+	</div>
+	<!-- 页码选择 -->
+	<div class="col-md-12 text-center" >
+		<button class="btn" ng-click="chooseGoodsPreviousPage()">上一页</button>
+		<span ng-repeat="goodsTotalPage in goodsPerPage8">
+			<button class="btn" ng-click="chooseGoodsPage($index+1)" ng-if="goodsNowPage != ($index+1)">{{$index+1}}</button>
+			<button class="btn btn-primary" ng-click="chooseGoodsPage($index+1)" ng-if="goodsNowPage == ($index+1)">{{$index+1}}</button>
+		</span>
+		<button class="btn" ng-click="chooseGoodsNextPage()">下一页</button>
+	</div>
+</div>
